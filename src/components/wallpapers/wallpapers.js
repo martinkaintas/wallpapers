@@ -25,7 +25,7 @@ function Wallpapers() {
     display: 'block'
   }))
   const bind = useDrag(({ active, movement: [mx], direction: [xDir], distance, cancel }) => {
-    if (active && distance > my_width / 1.7){
+    if (active && distance > my_width / 2.3){
       cancel((index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, pages.length - 1)))
     }
     set((i) => {
