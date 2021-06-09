@@ -1,3 +1,4 @@
+@import "../../mixins.scss";
 .footer{
     &__wrapper{
         position: absolute;
@@ -6,9 +7,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @include for-size(phone-only){
+            bottom: 5px;
+        }
     }
 
     &__content{
         color: #333;
+        font-size: 16px;
+        @include for-size(phone-only){
+            font-size: 10px;
+        }
     }
 }

@@ -1,6 +1,8 @@
 .swipe {
     &__wrapper {
         position: absolute;
+        user-select: none;
+        pointer-events: none;
         img {
             width: 50px;
             opacity: 0;

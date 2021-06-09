@@ -12,12 +12,12 @@ import img3 from '../../assets/images/image3.jpg'
 import download from '../../assets/icons/download.png'
 
 const pages = [img, img2, img3]
-
+const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
 
-
 function Wallpapers() {
-  const my_width = vhToPixel(36)
+
+  const my_width = isOnMob? vhToPixel(45) : vhToPixel(36)
   const index = useRef(0)
   const [images, set] = useSprings(pages.length, (i) => ({
     x: i * my_width,

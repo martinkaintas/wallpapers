@@ -1,6 +1,10 @@
+@import "../../mixins.scss";
 .phone {
-    $width: 36vh;
     $height: 74vh;
+    $width: 36vh;
+    $height_m: 90vh;
+    $width_m: 45vh;
+    
     &__wrapper {
         // background-color: white;
         width: 100%;
@@ -10,7 +14,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
     }
     &__phone {
         width: $width;
@@ -27,6 +30,15 @@
         animation-duration: 800ms;
         animation-timing-function: cubic-bezier(0.28, 0.96, 0.7, 1.08);
         animation-direction: normal;
+        @include for-size(phone-only) {
+            filter: drop-shadow(0px 0px 0px #00000000);
+            width: $width_m;
+            max-width: $width_m;
+            min-width: $width_m;
+            height: $height_m;
+            max-height: $height_m;
+            min-height: $height_m;
+        }
     }
 
     &__loader {
@@ -40,6 +52,16 @@
         min-height: $height;
         position: absolute;
         box-shadow: 0 0 0 10px #333; // border
+        animation: hideLoader 0ms normal 300ms forwards;
+        @include for-size(phone-only) {
+            box-shadow: none;
+            width: $width_m;
+            max-width: $width_m;
+            min-width: $width_m;
+            height: $height_m;
+            max-height: $height_m;
+            min-height: $height_m;
+        }
     }
 }
 
@@ -49,5 +71,13 @@
     }
     to {
         clip-path: circle(100%);
+    }
+}
+@keyframes hideLoader {
+    from {
+        background-color: #333;
+    }
+    to {
+        background-color: #00000000;
     }
 }
