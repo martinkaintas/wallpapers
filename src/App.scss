@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Farro&display=swap');
 
 html{
-    height: 100vh;
+    height: -webkit-fill-available;
 }
 
 body {
     font-family: 'Farro', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     overflow: hidden;
     margin: 0;
 }
