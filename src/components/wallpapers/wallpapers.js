@@ -15,6 +15,8 @@ const pages = [img, img2, img3]
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
 alert(isOnMob)
+alert(window.outerHeight)
+alert(window.innerHeight)
 
 function Wallpapers() {
 
