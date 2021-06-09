@@ -14,6 +14,7 @@ import download from '../../assets/icons/download.png'
 const pages = [img, img2, img3]
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
+alert(isOnMob)
 
 function Wallpapers() {
 

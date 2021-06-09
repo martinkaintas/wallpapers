@@ -4,7 +4,7 @@
     $width: 36vh;
     $height_m: 90vh;
     $width_m: 45vh;
-    
+
     &__wrapper {
         // background-color: white;
         width: 100%;
@@ -31,6 +31,8 @@
         animation-timing-function: cubic-bezier(0.28, 0.96, 0.7, 1.08);
         animation-direction: normal;
         @include for-size(phone-only) {
+            position: absolute;
+            top: 10px;
             filter: drop-shadow(0px 0px 0px #00000000);
             width: $width_m;
             max-width: $width_m;
@@ -54,6 +56,8 @@
         box-shadow: 0 0 0 10px #333; // border
         animation: hideLoader 0ms normal 300ms forwards;
         @include for-size(phone-only) {
+            position: absolute;
+            top: 10px;
             box-shadow: none;
             width: $width_m;
             max-width: $width_m;
