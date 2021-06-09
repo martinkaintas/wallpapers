@@ -14,13 +14,10 @@ import download from '../../assets/icons/download.png'
 const pages = [img, img2, img3]
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
-alert(isOnMob)
-alert(window.outerHeight)
-alert(window.innerHeight)
 
 function Wallpapers() {
 
-  const my_width = isOnMob? vhToPixel(45) : vhToPixel(36)
+  const my_width = isOnMob? vhToPixel(50) : vhToPixel(36)
   const index = useRef(0)
   const [images, set] = useSprings(pages.length, (i) => ({
     x: i * my_width,
@@ -28,7 +25,7 @@ function Wallpapers() {
     display: 'block'
   }))
   const bind = useDrag(({ active, movement: [mx], direction: [xDir], distance, cancel }) => {
-    if (active && distance > my_width / 1.6){
+    if (active && distance > my_width / 1.7){
       cancel((index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, pages.length - 1)))
     }
     set((i) => {
