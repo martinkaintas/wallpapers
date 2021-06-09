@@ -1,0 +1,21 @@
+.title{
+    &__wrapper{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    font-size: 10vh;
+    transform: translateX(23vh);
+    text-transform: uppercase;
+    color: #333;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    user-select: none;
+
+}

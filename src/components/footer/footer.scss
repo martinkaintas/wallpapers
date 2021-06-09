@@ -1,0 +1,14 @@
+.footer{
+    &__wrapper{
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__content{
+        color: #333;
+    }
+}

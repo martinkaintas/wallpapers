@@ -1,0 +1,42 @@
+.swipe {
+    &__wrapper {
+        position: absolute;
+        img {
+            width: 50px;
+            opacity: 0;
+            transform: rotateZ(0deg) translate(30px, 0px);
+            user-select: none;
+            pointer-events: none;
+            animation: rotate 1800ms cubic-bezier(0.28, 0.96, 0.7, 1.08) normal 2 0.5s,
+                appear 500ms ease-in-out normal forwards 0.2s, disappear 500ms ease-in-out normal forwards 3100ms;
+        }
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateZ(0deg) translate(30px, 0px);
+    }
+    40% {
+        transform: rotateZ(-45deg) translate(-30px, -30px);
+    }
+    80% {
+        transform: rotateZ(0deg) translate(30px, 0px);
+    }
+}
+@keyframes disappear {
+    from {
+        opacity: 0.7;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.7;
+    }
+}
