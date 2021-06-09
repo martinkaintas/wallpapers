@@ -41,7 +41,7 @@ function Wallpapers() {
       {images.map(({ x, display, scale }, i) => (
         <animated.div className="wallpapers__image-wrapper" key={i} style={{ display, x, scale }}{...bind()} >
           <animated.img className="wallpapers__image" draggable="false" src={pages[i]}/>
-          <animated.a className="wallpapers__image-button" href={pages[i]} target="_blank" download>
+          <animated.a className="wallpapers__image-button" href={pages[i]} target="_blank" rel="noreferrer" download>
             <animated.img src={download} draggable="false"/>
           </animated.a>
         </animated.div>

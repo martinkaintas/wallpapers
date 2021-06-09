@@ -9,7 +9,7 @@ function Footer() {
   return (
     <div className="footer__wrapper">
       <div className="footer__content">
-        made with ❤ by <a href={url} target="_blank">@martinkaintas</a>
+        made with ❤ by <a href={url} target="_blank" rel="noreferrer">@martinkaintas</a>
       </div>
     </div>
   );
