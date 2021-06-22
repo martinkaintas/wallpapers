@@ -52,7 +52,7 @@ function Wallpapers() {
 
   const getLink = i => {
     if (gallery != null) {
-      return `https://res.cloudinary.com/martincloud/image/upload/${gallery[i].public_id}.jpg`
+      return `https://res.cloudinary.com/martincloud/image/upload/fl_attachment:wallpaper_${i}/${gallery[i].public_id}.jpg`
     }
     return null
   }
@@ -68,7 +68,7 @@ function Wallpapers() {
             <Image className="wallpapers__image" draggable="false" cloudName="martincloud" secure="true" upload_preset="my_unsigned_preset" publicId={getImage(i)}>
               <Transformation width="600" crop="thumb" />
             </Image>
-            <animated.a className="wallpapers__image-button" href={getLink(i)} target="_blank" rel="noreferrer" download>
+            <animated.a className="wallpapers__image-button" href={getLink(i)} target="_blank" rel="noreferrer">
               <animated.img src={download} draggable="false" />
             </animated.a>
           </animated.div>
