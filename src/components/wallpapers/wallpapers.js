@@ -1,32 +1,39 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useSprings, animated } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 import clamp from 'lodash-es/clamp'
+import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
+import axios from 'axios';
 
 import './wallpapers.scss'
 
-import img from '../../assets/images/image1.jpg'
-import img2 from '../../assets/images/image2.jpg'
-import img3 from '../../assets/images/image3.jpg'
-
 import download from '../../assets/icons/download.png'
 
-const pages = [img, img2, img3]
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
 
 function Wallpapers() {
 
-  const my_width = isOnMob? vhToPixel(50) : vhToPixel(36)
+  const [gallery, setGallery] = useState(null)
+
+  useEffect(() => {
+    axios.get('https://res.cloudinary.com/martincloud/image/list/wallpapers.json')
+      .then(res => {
+        setGallery(res.data.resources);
+      });
+  }, []);
+
+  const my_width = isOnMob ? vhToPixel(50) : vhToPixel(36)
   const index = useRef(0)
-  const [images, set] = useSprings(pages.length, (i) => ({
+  const [images, set] = useSprings(15, (i) => ({
     x: i * my_width,
     scale: 1,
     display: 'block'
   }))
+
   const bind = useDrag(({ active, movement: [mx], direction: [xDir], distance, cancel }) => {
-    if (active && distance > my_width / 2.3){
-      cancel((index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, pages.length - 1)))
+    if (active && distance > my_width / 2.3) {
+      cancel((index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, gallery.length - 1)))
     }
     set((i) => {
       if (i < index.current - 1 || i > index.current + 1) return { display: 'none' }
@@ -36,18 +43,39 @@ function Wallpapers() {
     })
   })
 
+  const getImage = i => {
+    if (gallery != null) {
+      return gallery[i].public_id
+    }
+    return null
+  }
+
+  const getLink = i => {
+    if (gallery != null) {
+      return `https://res.cloudinary.com/martincloud/image/upload/${gallery[i].public_id}.jpg`
+    }
+    return null
+  }
+
+  if (gallery == null)
+    return <div>loading</div>
+
   return (
     <div className="wallpapers">
-      {images.map(({ x, display, scale }, i) => (
-        <animated.div className="wallpapers__image-wrapper" key={i} style={{ display, x, scale }}{...bind()} >
-          <animated.img className="wallpapers__image" draggable="false" src={pages[i]}/>
-          <animated.a className="wallpapers__image-button" href={pages[i]} target="_blank" rel="noreferrer" download>
-            <animated.img src={download} draggable="false"/>
-          </animated.a>
-        </animated.div>
-      ))
-      }
-    </div>
+      <CloudinaryContext cloudName="martincloud">
+        {images.map(({ x, display, scale }, i) => (
+          <animated.div className="wallpapers__image-wrapper" key={i} style={{ display, x, scale }}{...bind()} >
+            <Image className="wallpapers__image" draggable="false" cloudName="martincloud" secure="true" upload_preset="my_unsigned_preset" publicId={getImage(i)}>
+              <Transformation width="600" crop="thumb" />
+            </Image>
+            <animated.a className="wallpapers__image-button" href={getLink(i)} target="_blank" rel="noreferrer" download>
+              <animated.img src={download} draggable="false" />
+            </animated.a>
+          </animated.div>
+        ))
+        }
+      </CloudinaryContext>
+    </div >
   );
 }
 
