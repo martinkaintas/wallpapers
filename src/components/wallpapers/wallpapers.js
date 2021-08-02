@@ -9,6 +9,8 @@ import './wallpapers.scss'
 
 import download from '../../assets/icons/download.png'
 
+const gallery_length = 23 //! somehow count the images
+
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
 
@@ -25,7 +27,7 @@ function Wallpapers() {
 
   const my_width = isOnMob ? vhToPixel(50) : vhToPixel(36)
   const index = useRef(0)
-  const [images, set] = useSprings(15, (i) => ({
+  const [images, set] = useSprings(gallery_length, (i) => ({
     x: i * my_width,
     scale: 1,
     display: 'block'
@@ -65,6 +67,9 @@ function Wallpapers() {
       <CloudinaryContext cloudName="martincloud">
         {images.map(({ x, display, scale }, i) => (
           <animated.div className="wallpapers__image-wrapper" key={i} style={{ display, x, scale }}{...bind()} >
+            <div className="wallpapers__image-counter">
+              {i+1}/{gallery_length}
+            </div>
             <Image className="wallpapers__image" draggable="false" cloudName="martincloud" secure="true" upload_preset="my_unsigned_preset" publicId={getImage(i)}>
               <Transformation width="600" crop="thumb" />
             </Image>
