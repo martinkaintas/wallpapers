@@ -9,7 +9,7 @@ import './wallpapers.scss'
 
 import download from '../../assets/icons/download.png'
 
-const gallery_length = 23 //! somehow count the images
+const gallery_length = 25 //! somehow count the images
 
 const isOnMob = window.innerWidth <= 600
 const vhToPixel = value => (window.innerHeight * value) / 100
